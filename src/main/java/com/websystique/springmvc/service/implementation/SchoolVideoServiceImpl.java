@@ -40,12 +40,12 @@ public class SchoolVideoServiceImpl implements SchoolVideoService {
     }
 
     @Override
-    public List<SchoolVideo> findBySchoolNameAndGradeAndSubject(String schoolName, Short grade, Subject subject) {
+    public List<SchoolVideo> findBySchoolNameAndGradeAndSubject(String schoolName, Integer grade, Subject subject) {
         return schoolVideoRepository.findBySchoolNameAndGradeAndSubject(schoolName, grade, subject);
     }
 
     @Override
-    public List<SchoolVideo> findBySchoolNameAndGrade(String schoolName, Short grade) {
+    public List<SchoolVideo> findBySchoolNameAndGrade(String schoolName, Integer grade) {
         return schoolVideoRepository.findBySchoolNameAndGrade(
                 schoolName, grade);
     }

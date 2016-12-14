@@ -13,7 +13,7 @@ public class Course {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id")
@@ -36,7 +36,7 @@ public class Course {
     public Course() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

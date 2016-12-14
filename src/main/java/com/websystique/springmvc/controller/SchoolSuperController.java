@@ -175,7 +175,7 @@ public class SchoolSuperController {
     public ResponseEntity<SchoolPlusResponse<SchoolAdmin>> authenticateSchoolAdmin(
             @RequestParam("key") String key,
             @PathVariable("id") Long id,
-            @PathVariable("privilege") Short privilege
+            @PathVariable("privilege") Integer privilege
     ) {
         SchoolPlusResponse<SchoolAdmin> response = new SchoolPlusResponse<>();
 

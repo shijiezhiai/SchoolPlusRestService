@@ -30,7 +30,7 @@ public class SuperAdmin extends BaseUser implements Serializable {
     private String emailAddress;
 
     @Column(name = "privilege")
-    private Short privilege;
+    private Integer privilege;
 
     public SuperAdmin() {
     }
@@ -83,11 +83,11 @@ public class SuperAdmin extends BaseUser implements Serializable {
         this.emailAddress = emailAddress;
     }
 
-    public Short getPrivilege() {
+    public Integer getPrivilege() {
         return privilege;
     }
 
-    public void setPrivilege(Short privilege) {
+    public void setPrivilege(Integer privilege) {
         this.privilege = privilege;
     }
 

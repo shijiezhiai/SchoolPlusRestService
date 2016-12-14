@@ -26,7 +26,7 @@ public class Student {
     private Date birthday;
 
     @Column(name = "age")
-    private Short age;
+    private Integer age;
 
     @Column(name = "gps_dev_id")
     private String gpsDeviceId;
@@ -88,11 +88,11 @@ public class Student {
         this.birthday = birthday;
     }
 
-    public Short getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Short age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

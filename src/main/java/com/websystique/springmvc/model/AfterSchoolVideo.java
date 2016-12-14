@@ -27,7 +27,7 @@ public class AfterSchoolVideo {
     private String description;
 
     @Column(name = "grade")
-    private Short grade;
+    private Integer grade;
 
     @Column(name = "course")
     private String course;
@@ -103,11 +103,11 @@ public class AfterSchoolVideo {
         this.description = description;
     }
 
-    public Short getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(Short grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 

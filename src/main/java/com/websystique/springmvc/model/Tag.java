@@ -19,7 +19,7 @@ public class Tag {
     private String name;
 
     @Column(name = "type")
-    private Short type;
+    private Integer type;
 
     @ManyToMany(
             cascade = CascadeType.ALL,

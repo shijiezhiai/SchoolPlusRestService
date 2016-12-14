@@ -11,8 +11,8 @@ public interface AfterSchoolVideoService {
 
     AfterSchoolVideo findById(Long id);
 
-    List<AfterSchoolVideo> findByGradeAndCourse(Short grade, String course);
+    List<AfterSchoolVideo> findByGradeAndCourse(Integer grade, String course);
 
-    List<AfterSchoolVideo> findByGrade(Short grade);
+    List<AfterSchoolVideo> findByGrade(Integer grade);
 
 }

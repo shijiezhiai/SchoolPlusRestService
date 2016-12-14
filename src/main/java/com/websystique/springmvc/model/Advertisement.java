@@ -30,13 +30,6 @@ public class Advertisement {
     public Advertisement() {
     }
 
-    public Advertisement(AdvertisementPicture picture, String description, String advertiser, String type) {
-        this.picture = picture;
-        this.description = description;
-        this.advertiser = advertiser;
-        this.type = type;
-    }
-
     public Long getId() {
         return id;
     }

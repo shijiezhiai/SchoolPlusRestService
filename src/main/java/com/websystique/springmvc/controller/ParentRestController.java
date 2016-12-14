@@ -313,7 +313,7 @@ public class ParentRestController {
     public ResponseEntity<SchoolPlusResponse<List<SchoolVideo>>> getSchoolVideos(
             @RequestParam("key") String key,
             @RequestParam(value = "student_id") Long studentId,
-            @RequestParam(value = "grade", required = false) Short grade,
+            @RequestParam(value = "grade", required = false) Integer grade,
             @RequestParam(value = "course", required = false) String subjectName,
             @RequestParam(value = "tag", required = false) String tag
     ) {
@@ -364,7 +364,7 @@ public class ParentRestController {
     public ResponseEntity<SchoolPlusResponse<List<Article>>> getArticles(
             @RequestParam("key") String key,
             @RequestParam("student_id") Long studentId,
-            @RequestParam(value = "grade", required = false) Short grade,
+            @RequestParam(value = "grade", required = false) Integer grade,
             @RequestParam(value = "course", required = false) String subjectName,
             @RequestParam(value = "tag", required = false) String tag
     ) {
@@ -413,7 +413,7 @@ public class ParentRestController {
     )
     public ResponseEntity<SchoolPlusResponse<List<AfterSchoolVideo>>> getAfterSchoolVideos(
             @RequestParam("key") String key,
-            @RequestParam(value = "grade") Short grade,
+            @RequestParam(value = "grade") Integer grade,
             @RequestParam(value = "course", required = false) String course,
             @RequestParam(value = "tag", required = false) String tag
     ) {

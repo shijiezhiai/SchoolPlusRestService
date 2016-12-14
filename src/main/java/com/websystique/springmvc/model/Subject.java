@@ -13,7 +13,7 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Short id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -27,7 +27,7 @@ public class Subject {
     public Subject() {
     }
 
-    public Short getId() {
+    public Integer getId() {
         return id;
     }
 

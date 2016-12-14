@@ -32,7 +32,7 @@ public class Admin extends BaseUser implements Serializable {
     private String emailAddress;
 
     @Column(name = "privilege")
-    private Short privilege;
+    private Integer privilege;
 
     @Column(name = "audited")
     private Boolean isAudited;
@@ -47,7 +47,7 @@ public class Admin extends BaseUser implements Serializable {
     public Admin() {
     }
 
-    public Admin(String username, String passwdMd5, String mobilePhoneNumber, String emailAddress, Short privilege) {
+    public Admin(String username, String passwdMd5, String mobilePhoneNumber, String emailAddress, Integer privilege) {
         this.username = username;
         this.passwdMd5 = passwdMd5;
         this.mobilePhoneNumber = mobilePhoneNumber;
@@ -96,11 +96,11 @@ public class Admin extends BaseUser implements Serializable {
         this.emailAddress = emailAddress;
     }
 
-    public Short getPrivilege() {
+    public Integer getPrivilege() {
         return privilege;
     }
 
-    public void setPrivilege(Short privilege) {
+    public void setPrivilege(Integer privilege) {
         this.privilege = privilege;
     }
 

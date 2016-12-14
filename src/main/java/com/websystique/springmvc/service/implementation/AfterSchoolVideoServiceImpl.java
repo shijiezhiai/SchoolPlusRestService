@@ -25,12 +25,12 @@ public class AfterSchoolVideoServiceImpl implements AfterSchoolVideoService {
     }
 
     @Override
-    public List<AfterSchoolVideo> findByGradeAndCourse(Short grade, String course) {
+    public List<AfterSchoolVideo> findByGradeAndCourse(Integer grade, String course) {
         return afterSchoolVideoRepository.findByGradeAndCourse(grade, course);
     }
 
     @Override
-    public List<AfterSchoolVideo> findByGrade(Short grade) {
+    public List<AfterSchoolVideo> findByGrade(Integer grade) {
         return afterSchoolVideoRepository.findByGrade(grade);
     }
 }

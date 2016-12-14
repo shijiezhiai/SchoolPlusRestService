@@ -35,7 +35,7 @@ public class RedisKeyUtils {
         return Constants.CLASS_NOTIFICATION_IDS_KEY_PREFIX + "|" + classGradeId.toString();
     }
 
-    public static String schoolNotificationIdsKey(Short schoolId) {
+    public static String schoolNotificationIdsKey(Integer schoolId) {
         return Constants.SCHOOL_NOTIFICATION_IDS_KEY_PREFIX + "|" + schoolId.toString();
     }
 

@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface ArticleService {
 
-    List<Article> findBySchoolNameAndGradeAndSubject(String schoolName, Short grade, Subject subject);
+    List<Article> findBySchoolNameAndGradeAndSubject(String schoolName, Integer grade, Subject subject);
 
-    List<Article> findBySchoolNameAndGrade(String schoolName, Short grade);
+    List<Article> findBySchoolNameAndGrade(String schoolName, Integer grade);
 
     List<Article> findBySchoolNameAndSubject(String schoolName, Subject subject);
 

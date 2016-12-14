@@ -37,7 +37,7 @@ public class SchoolAdmin extends BaseUser implements Serializable {
     private School school;
 
     @Column(name = "privilege")
-    private Short privilege;
+    private Integer privilege;
 
     @Column(name = "audited")
     private Boolean isAudited;
@@ -105,11 +105,11 @@ public class SchoolAdmin extends BaseUser implements Serializable {
         this.school = school;
     }
 
-    public Short getPrivilege() {
+    public Integer getPrivilege() {
         return privilege;
     }
 
-    public void setPrivilege(Short privilege) {
+    public void setPrivilege(Integer privilege) {
         this.privilege = privilege;
     }
 }

@@ -17,12 +17,12 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query("SELECT a FROM Article a WHERE " +
             "a.school.name = ?1 AND a.grade = ?2 AND a.subject = ?3")
     List<Article> findBySchoolNameAndGradeAndSubject(
-            String schoolName, Short grade, Subject subject);
+            String schoolName, Integer grade, Subject subject);
 
     @Query("SELECT article FROM Article article WHERE " +
             "article.school.name = ?1 AND article.grade = ?2")
     List<Article> findBySchoolNameAndGrade(
-            String schoolName, Short grade);
+            String schoolName, Integer grade);
 
     @Query("SELECT a FROM Article a WHERE " +
             "a.school.name = ?1 AND a.subject = ?2")

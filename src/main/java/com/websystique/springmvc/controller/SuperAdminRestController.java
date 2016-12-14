@@ -184,7 +184,7 @@ public class SuperAdminRestController {
     public ResponseEntity<SchoolPlusResponse<Admin>> authenticateAdmin(
             @RequestParam("key") String key,
             @PathVariable("id") Long id,
-            @PathVariable("privilege") Short privilege) {
+            @PathVariable("privilege") Integer privilege) {
 
         SchoolPlusResponse<Admin> response = new SchoolPlusResponse<>();
 

@@ -20,7 +20,7 @@ public class Textbook {
     private Double price;
 
     @Column(name = "num_pages")
-    private Short numPages;
+    private Integer numPages;
 
     @Column(name = "press")
     private String press;
@@ -36,7 +36,7 @@ public class Textbook {
     public Textbook() {
     }
 
-    public Textbook(String isbn, String title, Double price, Short numPages, String press,
+    public Textbook(String isbn, String title, Double price, Integer numPages, String press,
                     TextbookPicture cover, Teacher uploader) {
         this.isbn = isbn;
         this.title = title;
@@ -71,11 +71,11 @@ public class Textbook {
         this.price = price;
     }
 
-    public Short getNumPages() {
+    public Integer getNumPages() {
         return numPages;
     }
 
-    public void setNumPages(Short numPages) {
+    public void setNumPages(Integer numPages) {
         this.numPages = numPages;
     }
 

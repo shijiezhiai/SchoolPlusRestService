@@ -14,9 +14,9 @@ import java.util.List;
 public interface AfterSchoolVideoRepository extends JpaRepository<AfterSchoolVideo, Long> {
 
     @Query("SELECT v FROM AfterSchoolVideo v WHERE v.grade = ?1 AND v.course = ?2")
-    List<AfterSchoolVideo> findByGradeAndCourse(Short grade, String course);
+    List<AfterSchoolVideo> findByGradeAndCourse(Integer grade, String course);
 
     @Query("SELECT v FROM AfterSchoolVideo v WHERE v.grade = ?1")
-    List<AfterSchoolVideo> findByGrade(Short grade);
+    List<AfterSchoolVideo> findByGrade(Integer grade);
 
 }

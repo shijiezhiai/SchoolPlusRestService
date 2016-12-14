@@ -19,7 +19,7 @@ public interface SchoolVideoRepository extends JpaRepository<SchoolVideo, Long> 
 
     @Query("SELECT v FROM SchoolVideo v WHERE v.school.name = ?1 AND v.grade = ?2")
     List<SchoolVideo> findBySchoolNameAndGrade(
-            String schoolName, Short grade);
+            String schoolName, Integer grade);
 
     @Query("SELECT v FROM SchoolVideo v WHERE v.school.name = ?1 AND v.subject = ?2")
     List<SchoolVideo> findBySchoolNameAndSubjectt(String schoolName, Subject subject);
@@ -27,5 +27,5 @@ public interface SchoolVideoRepository extends JpaRepository<SchoolVideo, Long> 
     @Query("SELECT v FROM SchoolVideo v WHERE v.school.name = ?1 " +
             "AND v.grade = ?2 AND v.subject = ?3")
     List<SchoolVideo> findBySchoolNameAndGradeAndSubject(
-            String schoolName, Short grade, Subject subject);
+            String schoolName, Integer grade, Subject subject);
 }

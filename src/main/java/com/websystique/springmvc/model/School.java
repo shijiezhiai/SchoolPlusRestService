@@ -13,7 +13,7 @@ public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Short id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -47,11 +47,11 @@ public class School {
         this.address = address;
     }
 
-    public Short getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

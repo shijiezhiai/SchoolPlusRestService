@@ -7,13 +7,13 @@ import com.websystique.springmvc.constant.Constants;
  * Created by kevin on 2016/11/27.
  */
 public class Utils {
-    public static boolean checkSchoolSuperPrivilege(Short privilege) {
+    public static boolean checkSchoolSuperPrivilege(Integer privilege) {
         // TODO implement privilege check for school super admin
 
         return true;
     }
 
-    public static Boolean validateSchoolAdminPrivilege(Short privilege) {
+    public static Boolean validateSchoolAdminPrivilege(Integer privilege) {
         // TODO implement privilege check for school admin
 
         return true;

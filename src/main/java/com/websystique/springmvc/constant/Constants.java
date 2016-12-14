@@ -8,35 +8,35 @@ public class Constants {
     /*
      * Privileges for admin (including super admin).
      */
-    public static final Short MANAGE_ADMIN = 1;
+    public static final Integer MANAGE_ADMIN = 1;
 
-    public static final Short MANAGE_SCHOOL_SUPER_ADMIN = 1 << 1;
-    public static final Short UPLOAD_AFTER_SCHOOL_VIDEO = 1 << 2;
-    public static final Short MANAGE_AFTER_SCHOOL_VIDEO = 1 << 3;
-    public static final Short PAY_TEACHER = 1 << 4;
+    public static final Integer MANAGE_SCHOOL_SUPER_ADMIN = 1 << 1;
+    public static final Integer UPLOAD_AFTER_SCHOOL_VIDEO = 1 << 2;
+    public static final Integer MANAGE_AFTER_SCHOOL_VIDEO = 1 << 3;
+    public static final Integer PAY_TEACHER = 1 << 4;
 
     /*
      * Privileges for school admins (including school super admin).
      */
-    public static final Short MANAGE_SCHOOL_ADMIN = 1;
+    public static final Integer MANAGE_SCHOOL_ADMIN = 1;
 
-    public static final Short MANAGE_TEACHER = 1 << 1;
-    public static final Short MANAGER_STUDENT = 1 << 2;
-    public static final Short MANAGE_VIDEO = 1 << 3;
-    public static final Short MANAGE_ACTIVITY = 1 << 4;
-    public static final Short MANAGE_NOTIFICATION = 1 << 5;
-    public static final Short MANAGE_ARTICLE = 1 << 6;
+    public static final Integer MANAGE_TEACHER = 1 << 1;
+    public static final Integer MANAGER_STUDENT = 1 << 2;
+    public static final Integer MANAGE_VIDEO = 1 << 3;
+    public static final Integer MANAGE_ACTIVITY = 1 << 4;
+    public static final Integer MANAGE_NOTIFICATION = 1 << 5;
+    public static final Integer MANAGE_ARTICLE = 1 << 6;
 
     /*
      * Privileges for teachers
      */
-    public static final Short VIEW_STUDENT = 1;
-    public static final Short VIEW_STUDENT_LOCATION = 1 << 1;
-    public static final Short VIEW_STUDENT_CHEKING_IN = 1 << 2;
-    public static final Short UPLOAD_SCHOOL_VIDEO = 1 << 3;
-    public static final Short UPLOAD_SCHOOL_ARTICLE = 1 << 4;
+    public static final Integer VIEW_STUDENT = 1;
+    public static final Integer VIEW_STUDENT_LOCATION = 1 << 1;
+    public static final Integer VIEW_STUDENT_CHEKING_IN = 1 << 2;
+    public static final Integer UPLOAD_SCHOOL_VIDEO = 1 << 3;
+    public static final Integer UPLOAD_SCHOOL_ARTICLE = 1 << 4;
 
-    public static final Short SUPER_ADMIN_ID = (short)0;
+    public static final Integer SUPER_ADMIN_ID = 0;
 
     public static final String SECRET_KEY = "Cp(#m#GyDKrtpKjexjaSWbpaHer&@0a9";
     public static final int APP_EXPIRE_TIME = 7 * 24 * 3600;

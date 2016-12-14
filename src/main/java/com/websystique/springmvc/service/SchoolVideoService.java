@@ -16,9 +16,9 @@ public interface SchoolVideoService {
 
     Boolean deleteById(Long id);
 
-    List<SchoolVideo> findBySchoolNameAndGradeAndSubject(String schoolName, Short grade, Subject subject);
+    List<SchoolVideo> findBySchoolNameAndGradeAndSubject(String schoolName, Integer grade, Subject subject);
 
-    List<SchoolVideo> findBySchoolNameAndGrade(String schoolName, Short grade);
+    List<SchoolVideo> findBySchoolNameAndGrade(String schoolName, Integer grade);
 
     List<SchoolVideo> findBySchoolNameAndSubject(String schoolName, Subject subject);
 }

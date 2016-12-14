@@ -22,15 +22,15 @@ public class TextbookPicture {
     private Textbook textbook;
 
     @Column(name = "height")
-    private Short height;
+    private Integer height;
 
     @Column(name = "width")
-    private Short width;
+    private Integer width;
 
     public TextbookPicture() {
     }
 
-    public TextbookPicture(String src, Textbook textbook, Short height, Short width) {
+    public TextbookPicture(String src, Textbook textbook, Integer height, Integer width) {
         this.src = src;
         this.textbook = textbook;
         this.height = height;
@@ -61,19 +61,19 @@ public class TextbookPicture {
         this.textbook = textbook;
     }
 
-    public Short getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(Short height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public Short getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
-    public void setWidth(Short width) {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 }

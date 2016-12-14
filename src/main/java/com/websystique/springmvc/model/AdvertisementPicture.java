@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by kevin on 2016/11/22.
  */
 @Entity
-@Table(name = "picture")
+@Table(name = "advertisement_picture")
 public class AdvertisementPicture {
 
     @Column(name = "id")
@@ -22,15 +22,15 @@ public class AdvertisementPicture {
     private Advertisement advertisement;
 
     @Column(name = "height")
-    private Short height;
+    private Integer height;
 
     @Column(name = "width")
-    private Short width;
+    private Integer width;
 
     public AdvertisementPicture() {
     }
 
-    public AdvertisementPicture(String src, Advertisement advertisement, Short height, Short width) {
+    public AdvertisementPicture(String src, Advertisement advertisement, Integer height, Integer width) {
         this.src = src;
         this.advertisement = advertisement;
         this.height = height;
@@ -57,19 +57,19 @@ public class AdvertisementPicture {
         this.advertisement = advertisement;
     }
 
-    public Short getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(Short height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public Short getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
-    public void setWidth(Short width) {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 }

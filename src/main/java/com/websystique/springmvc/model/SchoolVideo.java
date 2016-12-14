@@ -27,7 +27,7 @@ public class SchoolVideo {
     private String description;
 
     @Column(name = "grade")
-    private Short grade;
+    private Integer grade;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id")
@@ -142,11 +142,11 @@ public class SchoolVideo {
         isAudited = audited;
     }
 
-    public Short getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(Short grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 

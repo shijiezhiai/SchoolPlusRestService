@@ -149,7 +149,7 @@ public class AdminRestController {
     public ResponseEntity<SchoolPlusResponse<SchoolSuper>> authenticateSchoolSuper(
             @RequestParam("key") String key,
             @PathVariable("id") Long id,
-            @PathVariable("privilege") Short privilege
+            @PathVariable("privilege") Integer privilege
     ) {
         SchoolPlusResponse<SchoolSuper> response = new SchoolPlusResponse<>();
 

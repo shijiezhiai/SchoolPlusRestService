@@ -22,10 +22,10 @@ public class ArticlePicture {
     private Article article;
 
     @Column(name = "height")
-    private Short height;
+    private Integer height;
 
     @Column(name = "width")
-    private Short width;
+    private Integer width;
 
     public ArticlePicture() {
     }
@@ -54,19 +54,19 @@ public class ArticlePicture {
         this.article = article;
     }
 
-    public Short getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(Short height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public Short getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
-    public void setWidth(Short width) {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 }

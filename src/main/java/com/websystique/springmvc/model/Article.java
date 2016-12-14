@@ -32,14 +32,14 @@ public class Article {
     private List<ArticlePicture> pictures;
 
     @Column(name = "type")
-    private Short type;
+    private Integer type;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Teacher author;
 
     @Column(name = "grade")
-    private Short grade;
+    private Integer grade;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id")
@@ -91,11 +91,11 @@ public class Article {
         this.tags = tags;
     }
 
-    public Short getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Short type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -123,11 +123,11 @@ public class Article {
         this.auditor = auditor;
     }
 
-    public Short getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(Short grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 

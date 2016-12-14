@@ -1,6 +1,7 @@
 package com.websystique.springmvc.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 /**
  * Created by kevin on 2016/12/3.
@@ -19,6 +20,9 @@ public class Activity {
 
     @Column(name = "content")
     private String content;
+
+    @Column(name = "date")
+    private Date publishTime;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "school_id")
@@ -69,5 +73,13 @@ public class Activity {
 
     public void setPublisher(SchoolAdmin publisher) {
         this.publisher = publisher;
+    }
+
+    public Date getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(Date publishTime) {
+        this.publishTime = publishTime;
     }
 }

@@ -37,7 +37,7 @@ public class SchoolSuper extends BaseUser implements Serializable {
     private School school;
 
     @Column(name = "privilege")
-    private Short privilege;
+    private Integer privilege;
 
     @Column(name = "audited")
     private Boolean isAudited;
@@ -53,7 +53,7 @@ public class SchoolSuper extends BaseUser implements Serializable {
     }
 
     public SchoolSuper(String username, String passwdMd5, String name, String emailAddress,
-                       String mobilePhoneNumber, School school, Short privilege, Boolean isAudited) {
+                       String mobilePhoneNumber, School school, Integer privilege, Boolean isAudited) {
         this.username = username;
         this.passwdMd5 = passwdMd5;
         this.name = name;
@@ -120,11 +120,11 @@ public class SchoolSuper extends BaseUser implements Serializable {
         this.school = school;
     }
 
-    public Short getPrivilege() {
+    public Integer getPrivilege() {
         return privilege;
     }
 
-    public void setPrivilege(Short privilege) {
+    public void setPrivilege(Integer privilege) {
         this.privilege = privilege;
     }
 

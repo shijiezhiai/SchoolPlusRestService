@@ -16,10 +16,10 @@ public class ClassGrade {
     private Integer id;
 
     @Column(name = "grade")
-    private Short grade;
+    private Integer grade;
 
     @Column(name = "class")
-    private Short clazz;
+    private Integer clazz;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "school_id")
@@ -38,7 +38,7 @@ public class ClassGrade {
     public ClassGrade() {
     }
 
-    public ClassGrade(Short grade, Short clazz, School school) {
+    public ClassGrade(Integer grade, Integer clazz, School school) {
         this.grade = grade;
         this.clazz = clazz;
         this.school = school;
@@ -52,19 +52,19 @@ public class ClassGrade {
         this.id = id;
     }
 
-    public Short getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(Short grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 
-    public Short getClazz() {
+    public Integer getClazz() {
         return clazz;
     }
 
-    public void setClazz(Short clazz) {
+    public void setClazz(Integer clazz) {
         this.clazz = clazz;
     }
 

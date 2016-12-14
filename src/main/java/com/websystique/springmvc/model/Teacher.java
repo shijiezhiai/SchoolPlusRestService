@@ -32,7 +32,7 @@ public class Teacher extends BaseUser implements Serializable {
     private Boolean isMale;
 
     @Column(name = "age")
-    private Short age;
+    private Integer age;
 
     @Column(name = "mobile_phone_number")
     private String mobilePhoneNumber;
@@ -70,7 +70,7 @@ public class Teacher extends BaseUser implements Serializable {
     private SchoolAdmin auditor;
 
     @Column(name = "privilege")
-    private Short privilege;
+    private Integer privilege;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "uploader")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -132,11 +132,11 @@ public class Teacher extends BaseUser implements Serializable {
         isMale = male;
     }
 
-    public Short getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Short age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -220,11 +220,11 @@ public class Teacher extends BaseUser implements Serializable {
         this.auditor = auditor;
     }
 
-    public Short getPrivilege() {
+    public Integer getPrivilege() {
         return privilege;
     }
 
-    public void setPrivilege(Short privilege) {
+    public void setPrivilege(Integer privilege) {
         this.privilege = privilege;
     }
 

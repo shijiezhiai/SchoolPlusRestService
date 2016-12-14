@@ -38,13 +38,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> findBySchoolNameAndGradeAndSubject(
-            String schoolName, Short grade, Subject subject) {
+            String schoolName, Integer grade, Subject subject) {
         return articleRepository.findBySchoolNameAndGradeAndSubject(
                 schoolName, grade, subject);
     }
 
     @Override
-    public List<Article> findBySchoolNameAndGrade(String schoolName, Short grade) {
+    public List<Article> findBySchoolNameAndGrade(String schoolName, Integer grade) {
         return articleRepository.findBySchoolNameAndGrade(schoolName, grade);
     }
 
