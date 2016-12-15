@@ -323,8 +323,7 @@ public class ParentRestController {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
-        String schoolName = studentService.findById(studentId)
-                .getSchool().getName();
+        School school = studentService.findById(studentId).getSchool();
 
         Subject subject = null;
         if (!(subjectName == null || subjectName.isEmpty())) {
@@ -340,13 +339,13 @@ public class ParentRestController {
 
         List<SchoolVideo> videos;
         if (grade != null && !(subjectName == null || subjectName.isEmpty())) {
-            videos = schoolVideoService.findBySchoolNameAndGradeAndSubject(schoolName, grade, subject);
+            videos = schoolVideoService.findBySchoolNameAndGradeAndSubject(school.getName(), grade, subject);
         } else if (grade != null) {
-            videos = schoolVideoService.findBySchoolNameAndGrade(schoolName, grade);
+            videos = schoolVideoService.findBySchoolNameAndGrade(school.getName(), grade);
         } else if (!(subjectName == null || subjectName.isEmpty())) {
-            videos = schoolVideoService.findBySchoolNameAndSubject(schoolName, subject);
+            videos = schoolVideoService.findBySchoolNameAndSubject(school.getName(), subject);
         } else {
-            videos = schoolVideoService.findBySchoolName(schoolName);
+            videos = schoolVideoService.findBySchool(school);
         }
 
         response.setStatusCode(200);

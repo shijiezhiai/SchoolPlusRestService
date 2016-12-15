@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by yangyma on 11/23/16.
  */
 @Repository
-public interface ClassGradeRepository extends JpaRepository<ClassGrade, Integer> {
+public interface ClassGradeRepository extends JpaRepository<ClassGrade, Long> {
 }

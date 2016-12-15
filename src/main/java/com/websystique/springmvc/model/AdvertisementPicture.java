@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class AdvertisementPicture {
 
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 

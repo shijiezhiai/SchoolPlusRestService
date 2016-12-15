@@ -14,7 +14,7 @@ import com.websystique.springmvc.types.BaseUser;
 @Table(name = "admin")
 public class Admin extends BaseUser implements Serializable {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Long id;

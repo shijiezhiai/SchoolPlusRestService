@@ -25,7 +25,7 @@ public class CourseServiceImpl implements CourseService {
     JCacheTools jCacheTools;
 
     @Override
-    public Course findById(Integer id) {
+    public Course findById(Long id) {
         String redisKey = RedisKeyUtils.courseIdKey(id);
         if (jCacheTools.existKey(redisKey)) {
             Gson gson = new Gson();

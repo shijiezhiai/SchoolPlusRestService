@@ -13,7 +13,7 @@ import com.websystique.springmvc.types.BaseUser;
 public class SuperAdmin extends BaseUser implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -33,14 +33,6 @@ public class SuperAdmin extends BaseUser implements Serializable {
     private Integer privilege;
 
     public SuperAdmin() {
-    }
-
-    public SuperAdmin(String username, String passwdMd5, String mobilePhoneNumber, String emailAddress) {
-        this.username = username;
-        this.passwdMd5 = passwdMd5;
-        this.mobilePhoneNumber = mobilePhoneNumber;
-        this.emailAddress = emailAddress;
-        this.privilege = Constants.MANAGE_ADMIN;
     }
 
     public Long getId() {

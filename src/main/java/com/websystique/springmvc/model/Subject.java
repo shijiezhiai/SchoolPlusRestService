@@ -11,9 +11,9 @@ import java.util.List;
 public class Subject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -27,7 +27,7 @@ public class Subject {
     public Subject() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

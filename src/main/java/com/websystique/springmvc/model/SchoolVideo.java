@@ -13,7 +13,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class SchoolVideo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

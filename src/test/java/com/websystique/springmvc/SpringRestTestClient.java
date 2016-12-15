@@ -46,7 +46,7 @@ public class SpringRestTestClient {
 		System.out.println("Testing create Admin API----------");
     	RestTemplate restTemplate = new RestTemplate();
         Admin admin = new Admin(
-				"jimmy", Md5Calculator.calMd5("123456"), "15022906687", "jimmy@126.com", (short)0);
+				"jimmy", Md5Calculator.calMd5("123456"), "15022906687", "jimmy@126.com", 0);
         URI uri = restTemplate.postForLocation(REST_SERVICE_URI + "/admin/", admin, Admin.class);
         System.out.println("Location : " + uri.toASCIIString());
     }
@@ -56,7 +56,7 @@ public class SpringRestTestClient {
 		System.out.println("Testing update Admin API----------");
         RestTemplate restTemplate = new RestTemplate();
         Admin admin  = new Admin(
-				"Tommy", Md5Calculator.calMd5("123456"), "12345678901", "alabo@163.com", (short)1);
+				"Tommy", Md5Calculator.calMd5("123456"), "12345678901", "alabo@163.com", 1);
         restTemplate.put(REST_SERVICE_URI+"/admin/1", admin);
         System.out.println(admin);
     }

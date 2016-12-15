@@ -15,7 +15,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Parent extends BaseUser implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

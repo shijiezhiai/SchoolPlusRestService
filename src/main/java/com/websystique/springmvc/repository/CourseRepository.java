@@ -11,7 +11,7 @@ import java.util.List;
  * Created by yangyma on 11/23/16.
  */
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Integer> {
+public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query("SELECT c FROM Course c WHERE c.classGrade.id = ?1 AND c.subject.name = ?2")
     Course findByClassGradeIdAndSubjectName(Integer classGradeId, String subjectsStr);

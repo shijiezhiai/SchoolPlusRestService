@@ -7,6 +7,7 @@ import com.websystique.springmvc.service.SuperAdminService;
 import com.websystique.springmvc.types.SchoolPlusResponse;
 import com.websystique.springmvc.util.ControllerUtils;
 import com.websystique.springmvc.util.redis.JCacheTools;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/super")
 public class SuperAdminRestController {
+
+    private static final Logger LOGGER = Logger.getLogger(SuperAdminRestController.class);
 
 	@Autowired
 	AdminService adminService;  //Service which will do all data retrieval/manipulation work
@@ -34,9 +37,8 @@ public class SuperAdminRestController {
 
 	@RequestMapping(
 			value = "/login",
-			method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE,
-			params = {"username", "passwd"}
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE
 	)
 	public ResponseEntity<SchoolPlusResponse<Boolean>> login(
             @RequestParam(value = "device_type", required = false) String devType,
@@ -97,9 +99,16 @@ public class SuperAdminRestController {
 			value = "/admins",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SchoolPlusResponse<List<Admin>>> listAdmins() {
+	public ResponseEntity<SchoolPlusResponse<List<Admin>>> listAdmins(
+            @RequestParam("key") String key
+    ) {
         SchoolPlusResponse<List<Admin>> response = new SchoolPlusResponse<>();
-		System.out.println("Fetching all admins");
+
+        if (controllerUtils.verifyKey(key, response) != null) {
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        }
+
+		LOGGER.info("Fetching all admins");
 		List<Admin> admins = adminService.findAll();
 		if (admins == null) {
 			System.out.println("No admins found");
@@ -127,7 +136,7 @@ public class SuperAdminRestController {
 
         SchoolPlusResponse<Admin> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -177,7 +186,7 @@ public class SuperAdminRestController {
     }
 
     @RequestMapping(
-            value = "/authenticate_admin/{id}/{privilege}",
+            value = "/admin/authenticate/{id}/{privilege}",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

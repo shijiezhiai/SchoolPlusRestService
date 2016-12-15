@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * Created by kevin on 2016/12/13.
  */
 @Repository
-public interface SubjectRepository extends JpaRepository<Subject, Integer> {
-    Subject findByName(String key);
+public interface SubjectRepository extends JpaRepository<Subject, Long> {
+    Subject findByName(String name);
 }

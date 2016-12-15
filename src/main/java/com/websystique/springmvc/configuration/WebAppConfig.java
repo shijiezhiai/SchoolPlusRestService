@@ -38,6 +38,10 @@ public class WebAppConfig {
     private static final String PROPERTY_NAME_DATABASE_USERNAME = "db.username";
 
 
+    private static final String PROPERTY_NAME_SCHEMA_GEN = "javax.persistence.schema-generation.scripts.action";
+    private static final String PROPERTY_NAME_CREATE_SOURCE = "javax.persistence.schema-generation.create-source";
+    private static final String PROPERTY_NAME_CREATE_TARGET =
+            "javax.persistence.schema-generation.scripts.create-target";
     private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String PROPERTY_NAME_SHOW_SQL = "hibernate.show_sql";
     private static final String PROPERTY_NAME_ENTITY_MANAGER_PACKAGE_TO_SCAN =
@@ -75,6 +79,9 @@ public class WebAppConfig {
         Properties properties = new Properties();
         properties.put(PROPERTY_NAME_HIBERNATE_DIALECT, environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
         properties.put(PROPERTY_NAME_SHOW_SQL, environment.getRequiredProperty(PROPERTY_NAME_SHOW_SQL));
+        properties.put(PROPERTY_NAME_SCHEMA_GEN, "create");
+        properties.put(PROPERTY_NAME_CREATE_SOURCE, "metadata");
+        properties.put(PROPERTY_NAME_CREATE_TARGET, "target/jpa/sql/create-schema.sql");
         return properties;
     }
 

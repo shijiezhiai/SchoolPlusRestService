@@ -13,7 +13,7 @@ import com.websystique.springmvc.types.BaseUser;
 public class SchoolSuper extends BaseUser implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

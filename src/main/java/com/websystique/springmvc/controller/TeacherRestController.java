@@ -164,7 +164,7 @@ public class TeacherRestController {
         String[] courseIdArray = courseIds.split("|");
         for (int i = 0; i < courseIdArray.length; i++) {
             String courseIdStr = courseIdArray[i];
-            Course course = courseService.findById(Integer.parseInt(courseIdStr));
+            Course course = courseService.findById(Long.parseLong(courseIdStr));
             if (course == null) {
                 response.setStatusCode(400);
                 response.setResult("NoEntity");

@@ -24,8 +24,8 @@ public class SubjectServiceImpl implements SubjectService {
     private LoadingCache<String, Subject> subjectCache = CacheBuilder.newBuilder()
             .build(new CacheLoader<String, Subject>() {
                 @Override
-                public Subject load(String key) throws Exception {
-                    return subjectRepository.findByName((String)key);
+                public Subject load(String name) throws Exception {
+                    return subjectRepository.findByName(name);
                 }
             });
 

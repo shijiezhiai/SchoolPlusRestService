@@ -63,7 +63,6 @@ public class SchoolAdminRestController {
         SchoolAdmin schoolAdmin = schoolAdminService.findByUsername(username);
 
         return controllerUtils.doLogin(devType, devToken, username, password, schoolAdmin, response);
-
     }
 
     @RequestMapping(
@@ -253,8 +252,7 @@ public class SchoolAdminRestController {
 
         SchoolAdmin schoolAdmin = schoolAdminService.findById(adminId);
 
-        List<SchoolVideo> schoolVideos = schoolVideoService.findBySchoolName(
-                schoolAdmin.getSchool().getName());
+        List<SchoolVideo> schoolVideos = schoolVideoService.findBySchool(schoolAdmin.getSchool());
         if (schoolVideos == null) {
             response.setStatusCode(204);
             response.setResult("NoEntity");
@@ -339,9 +337,21 @@ public class SchoolAdminRestController {
             @RequestParam("key") String key,
             @PathVariable("id") Long id
     ) {
-        // TODO authenticate school video of id
+        SchoolPlusResponse<SchoolVideo> response = new SchoolPlusResponse<>();
 
-        return null;
+        if (controllerUtils.verifyKey(key, response) != null) {
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        }
+
+        SchoolVideo schoolVideo = schoolVideoService.findById(id);
+
+        if (schoolVideo == null) {
+            return controllerUtils.getResponseEntity(schoolVideo);
+        }
+
+        schoolVideo.setAudited(true);
+        SchoolVideo savedSchoolVideo = schoolVideoService.save(schoolVideo);
+        return controllerUtils.getResponseEntity(savedSchoolVideo);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.websystique.springmvc.repository;
 
+import com.websystique.springmvc.model.School;
 import com.websystique.springmvc.model.SchoolVideo;
 import com.websystique.springmvc.model.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,4 +29,7 @@ public interface SchoolVideoRepository extends JpaRepository<SchoolVideo, Long> 
             "AND v.grade = ?2 AND v.subject = ?3")
     List<SchoolVideo> findBySchoolNameAndGradeAndSubject(
             String schoolName, Integer grade, Subject subject);
+
+    @Query("SELECT v FROM SchoolVideo v WHERE v.school = ?1")
+    List<SchoolVideo> findBySchool(School school);
 }

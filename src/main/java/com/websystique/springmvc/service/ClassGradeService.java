@@ -7,5 +7,5 @@ import com.websystique.springmvc.model.ClassGrade;
  */
 public interface ClassGradeService {
 
-    ClassGrade findById(Integer id);
+    ClassGrade findById(Long id);
 }

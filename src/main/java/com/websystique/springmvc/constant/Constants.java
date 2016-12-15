@@ -60,10 +60,14 @@ public class Constants {
     public static final String COURSE_SCORE_LAST_DATE_KEY_PREFIX = "CSD";
     public static final String ARTICLE_ID_KEY_PREFIX = "AI";
     public static final String TEACHER_ARTICLE_IDS_KEY = "TAI";
+    public static final String SCHOOL_VIDEO_ID_KEY_PREFIX = "SVI";
+    public static final String SCHOOL_ID_SCHOOL_VIDEO_IDS_KEY_PREFIX = "SISVI";
+    public static final String TEACHER_SCHOOL_VIDEO_IDS_KEY_PREFIX = "TSVI";
 
     public static final int NOTIFICATION_REDIS_EXPIRE_TIME = 7 * 24 * 3600;
     public static final int HOMEWORK_REDIS_EXPIRE = 1 * 24 * 3600;
     public static final int ARTICLE_REDIS_EXPIRE = 7 * 24 * 3600;
+    public static final int SCHOOL_VIDEO_EXPIRE_TIME = 7 * 24 * 3600;
 
 
     public static final String LOGIN_DEV_WEB = "web";

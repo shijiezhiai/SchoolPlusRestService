@@ -1,5 +1,6 @@
 package com.websystique.springmvc.service;
 
+import com.websystique.springmvc.model.School;
 import com.websystique.springmvc.model.SchoolVideo;
 import com.websystique.springmvc.model.Subject;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface SchoolVideoService {
 
-    List<SchoolVideo> findBySchoolName(String name);
+    List<SchoolVideo> findBySchool(School school);
 
     SchoolVideo findById(Long id);
 
@@ -21,4 +22,6 @@ public interface SchoolVideoService {
     List<SchoolVideo> findBySchoolNameAndGrade(String schoolName, Integer grade);
 
     List<SchoolVideo> findBySchoolNameAndSubject(String schoolName, Subject subject);
+
+    SchoolVideo save(SchoolVideo schoolVideo);
 }
