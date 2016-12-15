@@ -46,6 +46,7 @@ public class Constants {
     public static final int ARTICLE_REDIS_EXPIRE = 7 * 24 * 3600;
     public static final int SCHOOL_VIDEO_EXPIRE_TIME = 7 * 24 * 3600;
     public static final int SCORE_EXPIRE_TIME = 7 * 24 * 3600;
+    public static final int TEXTBOOK_EXPIRE_TIME = 30 * 24 * 3600;
 
     // Use these prefix + username to compose unique key in cache
     public static final String SUPER_ADMIN_KEY_PREFIX = "SA";
@@ -61,9 +62,9 @@ public class Constants {
     public static final String STUDENT_NOTIFICATION_IDS_KEY_PREFIX = "SNI";
     public static final String CLASS_NOTIFICATION_IDS_KEY_PREFIX = "CNI";
     public static final String SCHOOL_NOTIFICATION_IDS_KEY_PREFIX = "LNI";
-    public static final String ACTIVITY_ID_KEY_PREFIX = "C";
-    public static final String CLASS_GRADE_ID_KEY_PREFIX = "CG";
-    public static final String HOMEWORK_ID_KEY_PREFIX = "H";
+    public static final String ACTIVITY_ID_KEY_PREFIX = "CI";
+    public static final String CLASS_GRADE_ID_KEY_PREFIX = "CGI";
+    public static final String HOMEWORK_ID_KEY_PREFIX = "HI";
     public static final String COURSE_ID_KEY_PREFIX = "CSI";
     public static final String COURSE_SCORE_LAST_DATE_KEY_PREFIX = "CSD";
     public static final String ARTICLE_ID_KEY_PREFIX = "AI";
@@ -71,6 +72,8 @@ public class Constants {
     public static final String SCHOOL_VIDEO_ID_KEY_PREFIX = "SVI";
     public static final String SCHOOL_ID_SCHOOL_VIDEO_IDS_KEY_PREFIX = "SISVI";
     public static final String TEACHER_SCHOOL_VIDEO_IDS_KEY_PREFIX = "TSVI";
+    public static final String TEXTBOOK_ID_KEY_PREFIX = "TBI";
+    public static final String TEACHER_TEXTBOOK_IDS_KEY_PREFIX = "TTBI";
 
     public static final String LOGIN_DEV_WEB = "web";
     public static final String LOGIN_DEV_APP = "app";

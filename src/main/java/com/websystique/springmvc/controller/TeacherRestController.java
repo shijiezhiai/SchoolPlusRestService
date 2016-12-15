@@ -494,7 +494,7 @@ public class TeacherRestController {
     }
 
     @RequestMapping(
-            value = "/score/publish",
+            value = "/scores/publish",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -510,6 +510,25 @@ public class TeacherRestController {
         List<Score> savedScores = scoreService.save(scores);
 
         return controllerUtils.getResponseEntity(savedScores);
+    }
+
+    @RequestMapping(
+            value = "/textbooks",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<SchoolPlusResponse<List<Textbook>>> getTextbooks(
+            @RequestParam("key") String key
+    ) {
+        SchoolPlusResponse<List<Textbook>> response = new SchoolPlusResponse<>();
+
+        if (controllerUtils.verifyKey(key, response) != null) {
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        }
+
+        Teacher thisTeacher = teacherService.findById(Long.parseLong(jCacheTools.getStringFromJedis(key)));
+        List<Textbook> textbooks = textbookService.findByTeacher(thisTeacher);
+        return controllerUtils.getResponseEntity(textbooks);
     }
 
     private List<Score> getLastScoresByCourses(List<Course> courses) {

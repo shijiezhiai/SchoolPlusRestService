@@ -78,4 +78,12 @@ public class RedisKeyUtils {
     public static String teacherSchoolVideoIdsKey(Long id) {
         return Constants.TEACHER_SCHOOL_VIDEO_IDS_KEY_PREFIX + "|" + id.toString();
     }
+
+    public static String teacherTextbookIdsKey(Long id) {
+        return Constants.TEACHER_TEXTBOOK_IDS_KEY_PREFIX + "|" + id.toString();
+    }
+
+    public static String textbookIdKey(Long id) {
+        return Constants.TEXTBOOK_ID_KEY_PREFIX + "|" + id.toString();
+    }
 }
