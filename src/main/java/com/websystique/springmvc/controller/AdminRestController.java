@@ -2,6 +2,7 @@ package com.websystique.springmvc.controller;
 
 import java.util.List;
 
+import com.websystique.springmvc.constant.Constants;
 import com.websystique.springmvc.util.ControllerUtils;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -78,7 +79,8 @@ public class AdminRestController {
 
         Admin admin = adminService.findByUsername(username);
 
-        return controllerUtils.doLogin(devType, devToken, username, password, admin, response);
+        return controllerUtils.doLogin(devType, devToken, username, password, admin,
+                Constants.ADMIN_KEY_PREFIX, response);
 	}
 
     @RequestMapping(
@@ -123,7 +125,7 @@ public class AdminRestController {
     ) {
         SchoolPlusResponse<List<SchoolSuper>> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -153,7 +155,7 @@ public class AdminRestController {
     ) {
         SchoolPlusResponse<SchoolSuper> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -203,7 +205,7 @@ public class AdminRestController {
     ) {
         SchoolPlusResponse<Boolean> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -220,7 +222,6 @@ public class AdminRestController {
             response.setData(Boolean.FALSE);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @RequestMapping(
@@ -235,7 +236,7 @@ public class AdminRestController {
     ) {
         SchoolPlusResponse<List<Advertisement>> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -259,15 +260,15 @@ public class AdminRestController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<SchoolPlusResponse<Advertisement>> getAdvertisement(
-            @RequestParam("key") String key,
-            @PathVariable("id") Long id
+            @RequestParam("key") String key
     ) {
         SchoolPlusResponse<Advertisement> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
+        Long id = Long.parseLong(jCacheTools.getStringFromJedis(key));
         Advertisement advertisement = advertisementService.findById(id);
         return controllerUtils.getResponseEntity(advertisement);
     }
@@ -283,7 +284,7 @@ public class AdminRestController {
     ) {
         SchoolPlusResponse<Advertisement> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -307,12 +308,11 @@ public class AdminRestController {
     ) {
         SchoolPlusResponse<Boolean> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
         Boolean res = advertisementService.deleteById(id);
-
         if (res) {
             response.setStatusCode(200);
             response.setResult("OK");

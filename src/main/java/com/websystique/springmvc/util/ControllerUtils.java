@@ -27,15 +27,15 @@ public class ControllerUtils {
     PushUtils pushUtils;
 
 
-    public <T extends SchoolPlusResponse> String verifyKey(String key, T response) {
+    public <T extends SchoolPlusResponse> T verifyKey(String key, T response) {
         if (!jCacheTools.existKey(key)) {
             response.setStatusCode(403);
             response.setResult("Unauthorized");
             response.setShortMessage("用户未登录或登录已过期");
 
-            return null;
+            return response;
         } else {
-            return jCacheTools.getStringFromJedis(key);
+            return null;
         }
     }
 
@@ -57,11 +57,12 @@ public class ControllerUtils {
     }
 
     public <T extends SchoolPlusResponse, S extends BaseUser> ResponseEntity<T> doLogin(
-            String devType, String devToken, String username, String password, S user, T response) {
+            String devType, String devToken, String username, String password, S user,
+            String keyPrefix, T response) {
         if (user  == null) {
             response.setStatusCode(204);
             response.setResult("NoEntity");
-            response.setShortMessage("该校园管理员不存在");
+            response.setShortMessage("该用户不存在");
 
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         } else if (! user.getPasswdMd5().equals(password)) {
@@ -72,7 +73,7 @@ public class ControllerUtils {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } else {
             String key = prepareLogin(
-                    devType, devToken, Constants.SCHOOL_ADMIN_KEY_PREFIX, username, user.getId(), user);
+                    devType, devToken, keyPrefix, username, user.getId(), user);
 
             response.setStatusCode(200);
             response.setResult("OK");
@@ -88,7 +89,7 @@ public class ControllerUtils {
             doModifyPassword(
                     String key, String oldPassword, String newPassword, S service, T response) {
 
-        if (verifyKey(key, response) == null) {
+        if (verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -177,7 +178,9 @@ public class ControllerUtils {
         }
 
         jCacheTools.addStringToJedis(key, id.toString(),
-                (deviceType.equals(Constants.LOGIN_DEV_APP)) ? Constants.APP_EXPIRE_TIME : Constants.WEB_EXPIRE_TIME);
+                (deviceType.equals(Constants.LOGIN_DEV_APP)) ?
+                        Constants.APP_EXPIRE_TIME :
+                        Constants.WEB_EXPIRE_TIME);
 
         return key;
     }
@@ -185,7 +188,7 @@ public class ControllerUtils {
     public <T> ResponseEntity<SchoolPlusResponse<Boolean>> doLogout(String key, T user) {
         SchoolPlusResponse<Boolean> response = new SchoolPlusResponse<>();
 
-        if (verifyKey(key, response) == null) {
+        if (verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 

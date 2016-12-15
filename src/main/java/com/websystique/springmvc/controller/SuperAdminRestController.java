@@ -1,5 +1,6 @@
 package com.websystique.springmvc.controller;
 
+import com.websystique.springmvc.constant.Constants;
 import com.websystique.springmvc.model.Admin;
 import com.websystique.springmvc.model.SuperAdmin;
 import com.websystique.springmvc.service.AdminService;
@@ -50,7 +51,8 @@ public class SuperAdminRestController {
 
 		SchoolPlusResponse<Boolean> response = new SchoolPlusResponse<>();
 
-        return controllerUtils.doLogin(devType, devToken, username, password, superAdmin, response);
+        return controllerUtils.doLogin(devType, devToken, username, password, superAdmin,
+                Constants.SUPER_ADMIN_KEY_PREFIX, response);
 	}
 
     @RequestMapping(
@@ -197,7 +199,7 @@ public class SuperAdminRestController {
 
         SchoolPlusResponse<Admin> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 

@@ -1,5 +1,6 @@
 package com.websystique.springmvc.controller;
 
+import com.websystique.springmvc.constant.Constants;
 import com.websystique.springmvc.model.SchoolAdmin;
 import com.websystique.springmvc.model.SchoolVideo;
 import com.websystique.springmvc.model.Teacher;
@@ -62,7 +63,8 @@ public class SchoolAdminRestController {
 
         SchoolAdmin schoolAdmin = schoolAdminService.findByUsername(username);
 
-        return controllerUtils.doLogin(devType, devToken, username, password, schoolAdmin, response);
+        return controllerUtils.doLogin(devType, devToken, username, password, schoolAdmin,
+                Constants.SCHOOL_ADMIN_KEY_PREFIX, response);
     }
 
     @RequestMapping(
@@ -117,12 +119,11 @@ public class SchoolAdminRestController {
     ) {
         SchoolPlusResponse<List<Teacher>> response = new SchoolPlusResponse<>();
 
-        String idStr = controllerUtils.verifyKey(key, response);
-        if (idStr == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
-        Long id = Long.parseLong(idStr);
+        Long id = Long.parseLong(jCacheTools.getStringFromJedis(key));
         SchoolAdmin schoolAdmin = schoolAdminService.findById(id);
         List<Teacher> teachers;
         if (isAudited == null) {
@@ -161,7 +162,7 @@ public class SchoolAdminRestController {
     ) {
         SchoolPlusResponse<Teacher> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -204,7 +205,7 @@ public class SchoolAdminRestController {
     ) {
         SchoolPlusResponse<Teacher> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -244,12 +245,11 @@ public class SchoolAdminRestController {
     ) {
         SchoolPlusResponse<List<SchoolVideo>> response = new SchoolPlusResponse<>();
 
-        String adminIdStr = controllerUtils.verifyKey(key, response);
-        if (adminIdStr == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
-        Long adminId = Long.parseLong(adminIdStr);
 
+        Long adminId = Long.parseLong(jCacheTools.getStringFromJedis(key));
         SchoolAdmin schoolAdmin = schoolAdminService.findById(adminId);
 
         List<SchoolVideo> schoolVideos = schoolVideoService.findBySchool(schoolAdmin.getSchool());
@@ -298,7 +298,7 @@ public class SchoolAdminRestController {
     ) {
         SchoolPlusResponse<Boolean> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 

@@ -93,7 +93,8 @@ public class TeacherRestController {
 
         Teacher teacher = teacherService.findByUsername(username);
 
-        return controllerUtils.doLogin(deviceType, deviceToken, username, password, teacher, response);
+        return controllerUtils.doLogin(deviceType, deviceToken, username, password, teacher,
+                Constants.TEACHER_KEY_PREFIX, response);
     }
 
     @RequestMapping(

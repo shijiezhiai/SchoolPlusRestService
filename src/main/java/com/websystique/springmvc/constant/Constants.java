@@ -43,10 +43,13 @@ public class Constants {
     public static final int WEB_EXPIRE_TIME = 24 * 3600;
 
     // Use these prefix + username to compose unique key in cache
+    public static final String SUPER_ADMIN_KEY_PREFIX = "SA";
+    public static final String ADMIN_KEY_PREFIX = "A";
+    public static final String SCHOOL_SUPER_KEY_PREFIX = "SS";
+    public static final String SCHOOL_ADMIN_KEY_PREFIX = "S";
     public static final String PARENT_KEY_PREFIX = "P";
     public static final String TEACHER_KEY_PREFIX = "T";
-    public static final String ADMIN_KEY_PREFIX = "A";
-    public static final String SCHOOL_ADMIN_KEY_PREFIX = "S";
+
     public static final String PARENT_HOMEWORK_KEY_PREFIX = "PH";
     public static final String SCORE_KEY_PREFIX = "G"; //goal
     public static final String NOTIFICATION_ID_KEY_PREFIX = "NI"; // notification id

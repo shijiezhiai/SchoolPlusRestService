@@ -1,5 +1,6 @@
 package com.websystique.springmvc.controller;
 
+import com.websystique.springmvc.constant.Constants;
 import com.websystique.springmvc.model.SchoolAdmin;
 import com.websystique.springmvc.model.SchoolSuper;
 import com.websystique.springmvc.service.SchoolAdminService;
@@ -54,7 +55,8 @@ public class SchoolSuperController {
 
         SchoolSuper schoolSuper = schoolSuperService.findByUsername(username);
 
-        return controllerUtils.doLogin(devType, devToken, username, password, schoolSuper, response);
+        return controllerUtils.doLogin(devType, devToken, username, password, schoolSuper,
+                Constants.SCHOOL_SUPER_KEY_PREFIX, response);
     }
 
     @RequestMapping(
@@ -109,7 +111,7 @@ public class SchoolSuperController {
     ) {
         SchoolPlusResponse<List<SchoolAdmin>> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -136,7 +138,7 @@ public class SchoolSuperController {
     ) {
         SchoolPlusResponse<SchoolAdmin> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -179,7 +181,7 @@ public class SchoolSuperController {
     ) {
         SchoolPlusResponse<SchoolAdmin> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
@@ -228,7 +230,7 @@ public class SchoolSuperController {
     ) {
         SchoolPlusResponse<Boolean> response = new SchoolPlusResponse<>();
 
-        if (controllerUtils.verifyKey(key, response) == null) {
+        if (controllerUtils.verifyKey(key, response) != null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 

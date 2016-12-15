@@ -88,7 +88,8 @@ public class ParentRestController {
 
         Parent parent = parentService.findByUsername(username);
 
-        return controllerUtils.doLogin(deviceType, deviceToken, username, password, parent, response);
+        return controllerUtils.doLogin(deviceType, deviceToken, username, password, parent,
+                Constants.PARENT_KEY_PREFIX, response);
     }
 
     @RequestMapping(
@@ -152,8 +153,8 @@ public class ParentRestController {
         if (jCacheTools.existKey(getStudentsKey)) {
             List<String> studentIdStrings = jCacheTools.getListFromJedis(getStudentsKey);
             List<Long> studentIds = new ArrayList<>(studentIdStrings.size());
-            for (String stdentIdString : studentIdStrings) {
-                studentIds.add(Long.parseLong(stdentIdString));
+            for (String studentIdString : studentIdStrings) {
+                studentIds.add(Long.parseLong(studentIdString));
             }
             List<Student> students = studentService.findByIds(studentIds);
             response.setStatusCode(200);
@@ -492,10 +493,9 @@ public class ParentRestController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<SchoolPlusResponse<List<Activity>>> getActivity(
+    public ResponseEntity<SchoolPlusResponse<List<Activity>>> getActivities(
             @RequestParam(value = "key") String key,
-            @RequestParam(value = "student_id") Long studentId,
-            @PathVariable("id") Long id
+            @RequestParam(value = "student_id") Long studentId
     ) {
         SchoolPlusResponse<List<Activity>> response = new SchoolPlusResponse<>();
 
