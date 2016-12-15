@@ -232,7 +232,7 @@
                     <configuration>
                         <driver>com.mysql.jdbc.Driver</driver>
                         <dialect>org.hibernate.dialect.MySQL5InnoDBDialect</dialect>
-                        <url><![CDATA[jdbc:mysql://10.249.73.0:3306/schoolplus_new]]></url>
+                        <url><![CDATA[jdbc:mysql://localhost:3306/schoolplus_new]]></url>
                         <username>root</username>
                         <password>wa160309</password>
                     </configuration>

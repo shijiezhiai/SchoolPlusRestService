@@ -21,7 +21,7 @@ public class Activity {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "date")
+    @Column(name = "pub_date")
     private Date publishTime;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

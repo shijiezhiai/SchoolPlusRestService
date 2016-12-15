@@ -12,10 +12,12 @@ import com.websystique.springmvc.util.redis.JCacheTools;
 import com.websystique.springmvc.util.redis.RedisKeyUtils;
 import com.websystique.springmvc.util.storage.MediaStorage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.joda.ReadableInstantPrinter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -60,33 +62,37 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article findById(Long id) {
-        String redisKey = RedisKeyUtils.articleIdKey(id);
-        if (jCacheTools.existKey(redisKey)) {
-            Gson gson = new Gson();
-            return gson.fromJson(
-                    jCacheTools.getStringFromJedis(redisKey), Article.class);
-        } else {
-            return articleRepository.findOne(id);
-        }
+        return findById(id, false);
     }
 
     @Override
     @Transactional
     public Boolean deleteById(Long id) {
-        String redisKey = RedisKeyUtils.articleIdKey(id);
-        if (jCacheTools.existKey(redisKey)) {
-            jCacheTools.delKeyFromJedis(redisKey);
+
+        Article article = findById(id, true);
+        if (article != null) {
+            String redisKey = RedisKeyUtils.articleIdKey(id);
+            // delete the article id -> article cache
+            if (jCacheTools.existKey(redisKey)) {
+                jCacheTools.delKeyFromJedis(redisKey);
+            }
+            // delete the teacher id -> article id list cache
+            jCacheTools.deleteDataFromListJedis(
+                    RedisKeyUtils.teacherArticleIdsKey(article.getAuthor().getId()),
+                    Arrays.asList(id.toString()));
+
+            List<ArticlePicture> articlePictures = findById(id).getPictures();
+            articlePictureRepository.delete(articlePictures);
+            articleRepository.delete(id);
+
+            for (ArticlePicture pic : articlePictures) {
+                mediaStorage.deletePicture(pic.getSrc());
+            }
+
+            return Boolean.TRUE;
+        } else {
+            return Boolean.FALSE;
         }
-
-        List<ArticlePicture> articlePictures = findById(id).getPictures();
-        articlePictureRepository.delete(articlePictures);
-        articleRepository.delete(id);
-
-        for (ArticlePicture pic : articlePictures) {
-            mediaStorage.deletePicture(pic.getSrc());
-        }
-
-        return Boolean.TRUE;
     }
 
     @Override
@@ -96,12 +102,25 @@ public class ArticleServiceImpl implements ArticleService {
         article.setPictures(savedPictures);
         Article savedArticle = articleRepository.save(article);
 
-        String redisKey = RedisKeyUtils.articleIdKey(savedArticle.getId());
-        Gson gson = new Gson();
-        jCacheTools.addStringToJedis(redisKey,
-                gson.toJson(savedArticle), Constants.ARTICLE_REDIS_EXPIRE);
+        if (savedArticle != null) {
+            String redisKey = RedisKeyUtils.articleIdKey(savedArticle.getId());
+            Gson gson = new Gson();
+            addArticleToCache(savedArticle);
+        }
 
         return savedArticle;
+    }
+
+    private void addArticleToCache(Article article) {
+        String redisKey = RedisKeyUtils.articleIdKey(article.getId());
+        Gson gson = new Gson();
+        // Add acticle to id -> article cache
+        jCacheTools.addStringToJedis(redisKey, gson.toJson(article), Constants.ARTICLE_REDIS_EXPIRE);
+        // Add article to teacher id -> article id list cache
+        jCacheTools.pushDataToListJedis(
+                RedisKeyUtils.teacherArticleIdsKey(article.getAuthor().getId()),
+                article.getId().toString(),
+                0);
     }
 
     @Override
@@ -121,7 +140,26 @@ public class ArticleServiceImpl implements ArticleService {
 
             return articles;
         } else {
-            return articleRepository.findByTeacherId(teacherId);
+            List<Article> articles = articleRepository.findByTeacherId(teacherId);
+            for (Article article : articles) {
+                addArticleToCache(article);
+            }
+
+            return articles;
+        }
+    }
+
+    public Article findById(Long id, boolean forDelete) {
+        String redisKey = RedisKeyUtils.articleIdKey(id);
+        Gson gson = new Gson();
+        if (jCacheTools.existKey(redisKey)) {
+            return gson.fromJson(
+                    jCacheTools.getStringFromJedis(redisKey), Article.class);
+        } else {
+            Article article = articleRepository.findOne(id);
+            if (article != null && ! forDelete) {
+            }
+            return article;
         }
     }
 }

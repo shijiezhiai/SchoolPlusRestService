@@ -35,4 +35,8 @@ public interface ScoreRepository extends JpaRepository<Score, Long> {
 
     @Query("SELECT s FROM Score s WHERE s.date = ?1")
     List<Score> findByDate(Date date);
+
+    @Query("SELECT s FROM Score s WHERE s.student = ?1 AND s.course = ?2 AND s.date = ?3")
+    List<Score> findByStudentAndCourseAndDate(Student student, Course course, Date date);
+
 }

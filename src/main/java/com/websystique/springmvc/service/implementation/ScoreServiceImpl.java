@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.websystique.springmvc.constant.Constants;
 import com.websystique.springmvc.model.*;
 import com.websystique.springmvc.repository.ScoreRepository;
 import com.websystique.springmvc.service.ScoreService;
@@ -47,11 +48,19 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public Date getLastDateByCourse(Course course) {
         String classGradeScoreLastDateKey = RedisKeyUtils.courseScoreLastDateKey(course.getId());
+        Gson gson = new Gson();
         if (jCacheTools.existKey(classGradeScoreLastDateKey)) {
-            Gson gson = new Gson();
             return gson.fromJson(jCacheTools.getStringFromJedis(classGradeScoreLastDateKey), Date.class);
         } else {
-            return scoreRepository.getDatesByCourse(course).get(0);
+            Date lastDate = scoreRepository.getDatesByCourse(course).get(0);
+            if (lastDate != null) {
+                jCacheTools.addStringToJedis(
+                        RedisKeyUtils.courseScoreLastDateKey(course.getId()),
+                        gson.toJson(lastDate),
+                        Constants.SCORE_EXPIRE_TIME);
+            }
+
+            return lastDate;
         }
     }
 
@@ -68,5 +77,10 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public List<Score> findByDate(Date date) {
         return scoreRepository.findByDate(date);
+    }
+
+    @Override
+    public List<Score> findByStudentAndCourseAndDate(Student student, Course course, Date date) {
+        return scoreRepository.findByStudentAndCourseAndDate(student, course, date);
     }
 }

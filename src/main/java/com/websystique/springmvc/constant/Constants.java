@@ -41,6 +41,11 @@ public class Constants {
     public static final String SECRET_KEY = "Cp(#m#GyDKrtpKjexjaSWbpaHer&@0a9";
     public static final int APP_EXPIRE_TIME = 7 * 24 * 3600;
     public static final int WEB_EXPIRE_TIME = 24 * 3600;
+    public static final int NOTIFICATION_REDIS_EXPIRE_TIME = 7 * 24 * 3600;
+    public static final int HOMEWORK_REDIS_EXPIRE = 1 * 24 * 3600;
+    public static final int ARTICLE_REDIS_EXPIRE = 7 * 24 * 3600;
+    public static final int SCHOOL_VIDEO_EXPIRE_TIME = 7 * 24 * 3600;
+    public static final int SCORE_EXPIRE_TIME = 7 * 24 * 3600;
 
     // Use these prefix + username to compose unique key in cache
     public static final String SUPER_ADMIN_KEY_PREFIX = "SA";
@@ -66,12 +71,6 @@ public class Constants {
     public static final String SCHOOL_VIDEO_ID_KEY_PREFIX = "SVI";
     public static final String SCHOOL_ID_SCHOOL_VIDEO_IDS_KEY_PREFIX = "SISVI";
     public static final String TEACHER_SCHOOL_VIDEO_IDS_KEY_PREFIX = "TSVI";
-
-    public static final int NOTIFICATION_REDIS_EXPIRE_TIME = 7 * 24 * 3600;
-    public static final int HOMEWORK_REDIS_EXPIRE = 1 * 24 * 3600;
-    public static final int ARTICLE_REDIS_EXPIRE = 7 * 24 * 3600;
-    public static final int SCHOOL_VIDEO_EXPIRE_TIME = 7 * 24 * 3600;
-
 
     public static final String LOGIN_DEV_WEB = "web";
     public static final String LOGIN_DEV_APP = "app";

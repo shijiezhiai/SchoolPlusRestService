@@ -51,6 +51,13 @@ public class NotificationServiceImpl implements NotificationService {
             return getWithIds(cachedNotificationIds);
         } else {
             List<Notification> notifications = notificationRepository.findByStudent(student);
+            Gson gson = new Gson();
+            for (Notification notification : notifications) {
+                jCacheTools.addStringToJedis(
+                        RedisKeyUtils.notificationIdKey(notification.getId()),
+                        gson.toJson(notification),
+                        Constants.NOTIFICATION_REDIS_EXPIRE_TIME);
+            }
 
             return notifications;
         }

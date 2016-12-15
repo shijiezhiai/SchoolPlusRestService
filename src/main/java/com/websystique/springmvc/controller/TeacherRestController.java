@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,6 +57,9 @@ public class TeacherRestController {
     ArticleService articleService;
 
     @Autowired
+    StudentService studentService;
+
+    @Autowired
     PushUtils pushUtils;
 
     @Autowired
@@ -63,6 +67,7 @@ public class TeacherRestController {
 
     @Autowired
     ControllerUtils controllerUtils;
+
 
 
     @RequestMapping(
@@ -413,7 +418,7 @@ public class TeacherRestController {
 
         Article savedArticle = articleService.save(article, pictures);
 
-        return controllerUtils.getResponseEntity(article);
+        return controllerUtils.getResponseEntity(savedArticle);
     }
 
     @RequestMapping(
@@ -431,13 +436,91 @@ public class TeacherRestController {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
-        Article articleToDelete = articleService.findById(id);
-        if (articleToDelete == null) {
-            return controllerUtils.getResponseEntity(null);
-        }
-
         Boolean deleted = articleService.deleteById(id);
 
         return controllerUtils.getResponseEntity(deleted);
+    }
+
+    @RequestMapping(
+            value = "/scores/latest",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<SchoolPlusResponse<List<Score>>> getLatestScores(
+            @RequestParam("key") String key,
+            @RequestParam(value = "course_id", required = false) Long courseId,
+            @RequestParam(value = "class", required = false) Long classGradeId,
+            @RequestParam(value = "student_id") Long studentId
+    ) {
+        SchoolPlusResponse<List<Score>> response = new SchoolPlusResponse<>();
+
+        if (controllerUtils.verifyKey(key, response) != null) {
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        }
+
+        List<Score> scores = null;
+        // If no filters are specified
+        //      If the teacher is a head teacher, get all the scores of all the students in his/her class
+        //      If not, get all the scores of all the courses he/she teaches
+        if (courseId == null && classGradeId == null && studentId == null) {
+            Teacher thisTeacher = teacherService.findById(
+                    Long.parseLong(jCacheTools.getStringFromJedis(key)));
+            ClassGrade inChargeClass = thisTeacher.getInChargeClass();
+            if (inChargeClass != null) {
+                List<Course> courses = inChargeClass.getCourses();
+                scores = getLastScoresByCourses(courses);
+            } else {
+                List<Course> courses = thisTeacher.getTeachingCourses();
+                scores = getLastScoresByCourses(courses);
+            }
+        } else if (courseId != null && studentId != null) {
+            Course course = courseService.findById(courseId);
+            Date lastDate = scoreService.getLastDateByCourse(course);
+            scores = scoreService.findByStudentAndCourseAndDate(
+                    studentService.findById(studentId), course, lastDate);
+        } else if (courseId != null) {
+            Course course = courseService.findById(courseId);
+            scores = getLastScoresByCourses(Arrays.asList(course));
+        } else if (studentId != null) {
+            Student student = studentService.findById(studentId);
+            List<Course> courses = student.getCourses();
+            scores = getLastScoresByCourses(courses);
+        } else if (classGradeId != null) {
+            ClassGrade classGrade = classGradeService.findById(classGradeId);
+            List<Course> courses = classGrade.getCourses();
+            scores = getLastScoresByCourses(courses);
+        }
+        return controllerUtils.getResponseEntity(scores);
+    }
+
+    @RequestMapping(
+            value = "/score/publish",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<SchoolPlusResponse<List<Score>>> publishScores(
+            @RequestParam("key") String key,
+            @RequestBody List<Score> scores) {
+        SchoolPlusResponse<List<Score>> response = new SchoolPlusResponse<>();
+
+        if (controllerUtils.verifyKey(key, response) != null) {
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        }
+
+        List<Score> savedScores = scoreService.save(scores);
+
+        return controllerUtils.getResponseEntity(savedScores);
+    }
+
+    private List<Score> getLastScoresByCourses(List<Course> courses) {
+        List<Score> allScores = new ArrayList<>();
+        for (Course course : courses) {
+            Date date = scoreService.getLastDateByCourse(course);
+            List<Score> scores = scoreService.findByCourseAndDate(course, date);
+            if (scores != null) {
+                allScores.addAll(scores);
+            }
+        }
+        return allScores;
     }
 }

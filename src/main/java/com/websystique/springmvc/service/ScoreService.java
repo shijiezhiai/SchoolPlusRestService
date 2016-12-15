@@ -25,4 +25,6 @@ public interface ScoreService {
     List<Score> findByCourse(Course course);
 
     List<Score> findByDate(Date date);
+
+    List<Score> findByStudentAndCourseAndDate(Student student, Course course, Date date);
 }
